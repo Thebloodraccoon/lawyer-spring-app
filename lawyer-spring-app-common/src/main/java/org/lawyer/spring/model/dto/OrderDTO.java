@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @ToString
-public class ServiceDTO {
+public class OrderDTO {
     private Long id;
     private String type;
     private String name;

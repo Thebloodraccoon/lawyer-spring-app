@@ -10,8 +10,9 @@ import java.util.List;
 @Table(name = "t_lawyer")
 public class Lawyer extends Person {
     private String specialization;
+    @Column(name = "consultation_title")
     private String consultationTitle;
 
     @OneToMany(mappedBy = "lawyer")
-    private List<Service> services;
+    private List<Order> orders;
 }

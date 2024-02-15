@@ -14,5 +14,5 @@ public class LawyerDTO {
     private String email;
     private String specialization;
     private String consultationTitle;
-    private List<ServiceDTO> services;
+    private List<OrderDTO> services;
 }

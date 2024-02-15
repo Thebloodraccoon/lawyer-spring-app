@@ -1,7 +1,7 @@
 package org.lawyer.spring.repo;
 
 import org.hibernate.query.Query;
-import org.lawyer.spring.model.entity.Service;
+import org.lawyer.spring.model.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,30 +13,30 @@ import java.util.List;
 @Repository
 @Transactional
 @RequiredArgsConstructor
-public class ServiceHibernateSessionRepo implements ServiceRepo {
+public class OrderHibernateSessionRepo implements OrderRepo {
     private final SessionFactory sessionFactory;
 
     @Override
-    public Service save(Service service) {
-        getCurrentSession().persist(service);
-        return service;
+    public Order save(Order order) {
+        getCurrentSession().persist(order);
+        return order;
     }
 
     @Override
-    public Service find(Long id) {
-        return getCurrentSession().find(Service.class, id);
+    public Order find(Long id) {
+        return getCurrentSession().find(Order.class, id);
     }
 
     @Override
-    public List<Service> findAll() {
-        final Query<Service> query = getCurrentSession().createQuery("SELECT s FROM Service s", Service.class);
+    public List<Order> findAll() {
+        final Query<Order> query = getCurrentSession().createQuery("SELECT o FROM Order o", Order.class);
         return query.getResultList();
     }
 
     @Override
-    public Service remove(Service service) {
-        getCurrentSession().remove(service);
-        return service;
+    public Order remove(Order order) {
+        getCurrentSession().remove(order);
+        return order;
     }
 
     private Session getCurrentSession() {

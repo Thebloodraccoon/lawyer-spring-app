@@ -13,7 +13,7 @@ public class Client extends Person {
     private Address address;
 
     @OneToMany(mappedBy = "client")
-    private List<Service> services;
+    private List<Order> orders;
 }
 
 

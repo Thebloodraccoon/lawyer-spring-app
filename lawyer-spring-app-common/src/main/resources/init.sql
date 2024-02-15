@@ -16,7 +16,7 @@ CREATE TABLE t_lawyer (
 );
 
 
-CREATE TABLE t_service (
+CREATE TABLE t_order (
                            id INT PRIMARY KEY AUTO_INCREMENT,
                            type VARCHAR(64) NOT NULL,
                            name VARCHAR(64),
@@ -57,11 +57,11 @@ VALUES
     ('Client C', '765-432-1098', 'clientC@example.com');
 
 
-INSERT INTO t_service (type, name, date, cost, client_id, lawyer_id)
+INSERT INTO t_order (type, name, date, cost, client_id, lawyer_id)
 VALUES
-    ('Consultation', 'Service 1', '2024-02-14', 100.00, 1, 1),
-    ('Legal Advice', 'Service 2', '2024-02-14', 150.00, 2, 2),
-    ('Legal Support', 'Service 3', '2024-02-14', 200.00, 3, 3);
+    ('Consultation', 'Order 1', '2024-02-14', 100.00, 1, 1),
+    ('Legal Advice', 'Order 2', '2024-02-14', 150.00, 2, 2),
+    ('Legal Support', 'Order 3', '2024-02-14', 200.00, 3, 3);
 
 
 INSERT INTO t_address (country, state, place, street, house_num, apartment, client_id)

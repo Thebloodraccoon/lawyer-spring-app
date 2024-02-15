@@ -13,5 +13,5 @@ public class ClientDTO {
     private String phoneNumber;
     private String email;
     private AddressDTO address;
-    private List<ServiceDTO> services;
+    private List<OrderDTO> services;
 }
