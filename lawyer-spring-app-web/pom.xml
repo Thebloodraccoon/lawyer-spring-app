@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.hillel.spring</groupId>
-    <artifactId>lawyer-spring-app-data</artifactId>
+    <artifactId>lawyer-spring-app-web</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -18,28 +18,32 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hillel.spring</groupId>
-            <artifactId>lawyer-spring-app-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>lawyer-spring-app-service</artifactId>
+            <version>${parent.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
         </dependency>
     </dependencies>
-
 </project>

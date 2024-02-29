@@ -1,25 +1,24 @@
 package org.lawyer.spring.service;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.lawyer.spring.model.dto.LawyerDTO;
-import org.lawyer.spring.model.dto.LawyerListItemDTO;
 import org.lawyer.spring.model.entity.Lawyer;
 import org.lawyer.spring.model.mapper.LawyerMapper;
 import org.lawyer.spring.repo.LawyerRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class LawyerServiceDefault implements LawyerService {
-    @Autowired
-    private LawyerRepo lawyerRepo;
-    @Autowired
-    private LawyerMapper lawyerMapper;
+    private final LawyerRepo lawyerRepo;
+    private final LawyerMapper lawyerMapper;
 
     @Override
     public LawyerDTO getLawyerById(Long id) {
-        Lawyer lawyer = lawyerRepo.find(id);
+        Lawyer lawyer = lawyerRepo.findById(id).get();
 
         return lawyerMapper.lawyerToLawyerDTO(lawyer);
     }
@@ -42,11 +41,11 @@ public class LawyerServiceDefault implements LawyerService {
     }
 
     @Override
+    @Transactional
     public LawyerDTO deleteLawyer(Long id) {
-        Lawyer lawyer = lawyerRepo.find(id);
+        Lawyer biId = lawyerRepo.findById(id).get();
 
-        Lawyer remove = lawyerRepo.remove(lawyer);
-        return lawyerMapper.lawyerToLawyerDTO(remove);
-
+        lawyerRepo.delete(biId);
+        return lawyerMapper.lawyerToLawyerDTO(biId);
     }
 }

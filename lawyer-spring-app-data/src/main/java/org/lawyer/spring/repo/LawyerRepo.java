@@ -2,12 +2,9 @@ package org.lawyer.spring.repo;
 
 
 import org.lawyer.spring.model.entity.Lawyer;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface LawyerRepo {
-    Lawyer save(Lawyer lawyer);
-    Lawyer find(Long id);
-    List<Lawyer> findAll();
-    Lawyer remove(Lawyer lawyer);
+public interface LawyerRepo extends JpaRepository<Lawyer, Long> {
 }

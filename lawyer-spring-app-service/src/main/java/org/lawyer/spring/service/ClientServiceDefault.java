@@ -1,5 +1,7 @@
 package org.lawyer.spring.service;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.lawyer.spring.model.dto.ClientDTO;
 import org.lawyer.spring.model.dto.ClientListItemDTO;
 import org.lawyer.spring.model.entity.Client;
@@ -10,19 +12,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 @Scope("prototype")
+@RequiredArgsConstructor
 public class ClientServiceDefault implements ClientService {
-    @Autowired
-    private ClientMapper clientMapper;
-    @Autowired
-    private ClientRepo clientRepo;
+    private final ClientMapper clientMapper;
+    private final ClientRepo clientRepo;
     @Override
     public ClientDTO getClientById(Long id) {
-        Client client = clientRepo.find(id);
-        return clientMapper.clientToClientDTO(client);
+        Client byId = clientRepo.findById(id).get();
+        return clientMapper.clientToClientDTO(byId);
     }
 
     @Override
@@ -43,11 +45,11 @@ public class ClientServiceDefault implements ClientService {
     }
 
     @Override
+    @Transactional
     public ClientDTO deleteClient(Long id) {
-        Client client = clientRepo.find(id);
-        Client remove = clientRepo.remove(client);
+        Client byId = clientRepo.findById(id).get();
+        clientRepo.delete(byId);
 
-        return clientMapper.clientToClientDTO(remove);
-
+        return clientMapper.clientToClientDTO(byId);
     }
 }

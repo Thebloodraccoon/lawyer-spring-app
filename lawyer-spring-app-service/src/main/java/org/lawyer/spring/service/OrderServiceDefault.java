@@ -1,10 +1,11 @@
 package org.lawyer.spring.service;
 
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.lawyer.spring.model.dto.OrderDTO;
 import org.lawyer.spring.model.entity.Order;
 import org.lawyer.spring.model.mapper.OrderMapper;
 import org.lawyer.spring.repo.OrderRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +13,16 @@ import java.util.List;
 
 @Service
 @Scope("prototype")
+@RequiredArgsConstructor
 public class OrderServiceDefault implements OrderService {
-    @Autowired
-    private OrderMapper orderMapper;
-    @Autowired
-    private OrderRepo orderRepo;
+    private final OrderMapper orderMapper;
+    private final OrderRepo orderRepo;
 
     @Override
     public OrderDTO getOrderById(Long id) {
-        Order order = orderRepo.find(id);
+        Order byId = orderRepo.findById(id).get();
 
-        return orderMapper.orderToOrderDTO(order);
+        return orderMapper.orderToOrderDTO(byId);
     }
 
     @Override
@@ -44,10 +44,11 @@ public class OrderServiceDefault implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO deleteOrder(Long id) {
-        Order order = orderRepo.find(id);
-        Order remove = orderRepo.remove(order);
+        Order byId = orderRepo.findById(id).get();
+        orderRepo.delete(byId);
 
-        return orderMapper.orderToOrderDTO(remove);
+        return orderMapper.orderToOrderDTO(byId);
     }
 }

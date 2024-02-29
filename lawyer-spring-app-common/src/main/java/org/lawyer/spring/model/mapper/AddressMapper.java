@@ -7,6 +7,7 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AddressMapper {
-    Address addressDTOToAddress(AddressDTO addressDTO);
     AddressDTO addressToAddressDTO(Address address);
+    Address addressDTOtoAddress(AddressDTO addressDTO);
 }
+
